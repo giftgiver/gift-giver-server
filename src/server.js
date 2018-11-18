@@ -3,8 +3,6 @@ const fastify = require('fastify')({
   logger: true
 });
 
-const 
-
 // Log each request
 fastify.addHook('onRequest', async request => {
   request.log.info();
