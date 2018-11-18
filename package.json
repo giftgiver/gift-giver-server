@@ -22,11 +22,9 @@
   },
   "homepage": "https://github.com/giftgiver/gift-giver-server#readme",
   "dependencies": {
-    "fastify": "^1.13.0",
-    "fastify-gql": "^0.5.1",
-    "fastify-jwt": "^0.7.0",
-    "fastify-plugin": "^1.2.1",
-    "gulp-sourcemaps": "^2.6.4",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
+    "lodash": "^4.17.11",
     "meow": "^5.0.0",
     "nconf": "^0.10.0",
     "nconf-yaml": "^1.0.2"
@@ -43,6 +41,7 @@
     "gulp-nodemon": "^2.4.1",
     "gulp-prettier": "^2.0.0",
     "gulp-spawn-mocha-nyc": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-tar": "^2.1.0",
     "istanbul": "1.1.0-alpha.1",
     "mocha": "^5.2.0",
