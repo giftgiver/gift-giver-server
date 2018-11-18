@@ -1,5 +1,9 @@
 const fastify = require('./server');
 
+/**
+ * Start Server
+ * @param {*} port
+ */
 const start = async port => {
   try {
     await fastify.listen(port);
@@ -11,7 +15,8 @@ const start = async port => {
 };
 
 /**
- * Should only be used for testing.
+ * Stop Server
+ * ---Should only be used for testing---
  */
 const stop = async () => {
   try {

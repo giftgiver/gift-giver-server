@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp start",
-    "test": "nyc gulp test",
+    "test": "NODE_ENV=localhost nyc gulp test",
     "dev": "gulp dev",
     "format": "gulp format",
     "lint": "gulp lint",
@@ -23,6 +23,9 @@
   "homepage": "https://github.com/giftgiver/gift-giver-server#readme",
   "dependencies": {
     "fastify": "^1.13.0",
+    "fastify-gql": "^0.5.1",
+    "fastify-jwt": "^0.7.0",
+    "fastify-plugin": "^1.2.1",
     "gulp-sourcemaps": "^2.6.4",
     "meow": "^5.0.0",
     "nconf": "^0.10.0",
