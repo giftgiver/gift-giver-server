@@ -9,12 +9,12 @@ describe('index', () => {
   before(() => {
     sandbox = sinon.createSandbox();
   });
-  beforeEach(() => {});
+  beforeEach(async () => {});
   afterEach(async () => {
     sandbox.restore();
   });
 
-  describe('...', () => {
-    it('', async () => {});
+  describe('start', () => {
+    it('should call apollo listen with the port provided', async () => {});
   });
 });
