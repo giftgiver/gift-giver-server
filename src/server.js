@@ -8,18 +8,16 @@ fastify.addHook('onRequest', async request => {
   request.log.info();
 });
 
-const schema = `
-  type Query {
-    add(x: Int, y: Int): Int
-  }
-`;
+const schema = require('./routes/graphql/schemas/removeSchema');
 
 const resolvers = {
   Query: {
-    add: async (_, { x, y }) => x + y
+    add: async (_, { x, y }) => x + y,
+    remove: async () => 'woohoo!'
   }
 };
 
+// Registers POST /graphql route
 fastify.register(GQL, {
   schema,
   resolvers
@@ -28,6 +26,5 @@ fastify.register(GQL, {
 fastify.register(require('./config').init);
 fastify.register(require('./modules/plugin'));
 fastify.register(require('./routes/healthCheckRoute'));
-fastify.register(require('./routes/graphql/graphQlRoute'));
 
 module.exports = fastify;

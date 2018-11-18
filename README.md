@@ -17,3 +17,13 @@ $ npm run test
 ```
 
 runs clean, format, and lint
+
+## GraphQL
+
+POST /graphql
+
+```json
+{
+  "query": "{createUser(email: fake@email.com, password: fakepassword)}"
+}
+```
