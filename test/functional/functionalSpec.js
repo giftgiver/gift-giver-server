@@ -1,27 +1,21 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const server = require('../src/server');
-const log = require('pino')();
 const index = require('../src/index');
 
-const TEST_PORT = 3000;
-const LISTEN_STRING = `Apollo Server Started! Listening on port ${TEST_PORT}`;
 describe('index', () => {
   let sandbox;
-  let listenStub;
-  let logInfoStub;
 
-  before(() => {
-    sandbox = sinon.createSandbox();
-  });
-  beforeEach(async () => {
-    listenStub = sandbox.stub(server, 'listen');
-  });
-  afterEach(async () => {
-    sandbox.restore();
-  });
+  // before(() => {
+  //   sandbox = sinon.createSandbox();
+  // });
+  // beforeEach(async () => {
+  //   listenStub = sandbox.stub(server, 'listen');
+  // });
+  // afterEach(async () => {
+  //   sandbox.restore();
+  // });
 
-  describe('start', () => {
+  describe('functional tests', () => {
     it('should call apollo listen with the port provided', async () => {
       try {
         logInfoStub = sandbox.stub(log, 'info');

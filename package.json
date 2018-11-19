@@ -4,10 +4,14 @@
   "description": "Gift-Giver GraphQL",
   "main": "index.js",
   "scripts": {
-    "start": "gulp start",
-    "test": "NODE_ENV=localhost nyc gulp test",
-    "dev": "gulp dev",
+    "compose-up": "docker-compose up --build",
+    "compose-down": "docker-compose down",
+    "start": "node ./start.js",
+    "test": "NODE_ENV=localhost gulp test",
+    "test-coverage": "NODE_ENV=localhost nyc gulp test",
+    "dev": "NODE_ENV=localhost gulp dev",
     "format": "gulp format",
+    "pack": "gulp pack",
     "lint": "gulp lint",
     "clean": "gulp clean"
   },
@@ -32,6 +36,7 @@
     "pino": "^5.8.1"
   },
   "devDependencies": {
+    "apollo-server-testing": "^2.2.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^5.9.0",
@@ -42,11 +47,12 @@
     "gulp-mocha": "^6.0.0",
     "gulp-nodemon": "^2.4.1",
     "gulp-prettier": "^2.0.0",
-    "gulp-spawn-mocha-nyc": "^1.0.0",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-spawn-mocha-nyc": "^1.0.0",
     "gulp-tar": "^2.1.0",
     "istanbul": "1.1.0-alpha.1",
     "mocha": "^5.2.0",
+    "pino-pretty": "^2.2.3",
     "prettier": "^1.15.2",
     "sinon": "^7.1.1"
   },
@@ -60,7 +66,7 @@
       "src/"
     ],
     "exlude": [
-      "src/server.js",
+      "./src/server.js",
       "./start.js"
     ],
     "reporter": [

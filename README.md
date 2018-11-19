@@ -7,6 +7,7 @@ $ npm run start
 ```
 
 App listens on port 1337
+Dynamodb can GUI can be reached at http://localhost:8000/shell
 
 ## Testing
 
@@ -20,10 +21,5 @@ runs clean, format, and lint
 
 ## GraphQL
 
-POST /graphql
-
-```json
-{
-  "query": "{createUser(email: fake@email.com, password: fakepassword)}"
-}
-```
+Docs
+https://graphql.org

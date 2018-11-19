@@ -1,5 +1,5 @@
 const server = require('./server');
-const log = require('pino')();
+const log = require('./log');
 
 const start = async port => {
   try {
