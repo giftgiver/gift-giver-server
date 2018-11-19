@@ -1,26 +1,32 @@
 const { ApolloServer } = require('apollo-server');
 const log = require('./log');
 
+const dynamo = require('./modules/dynamoDBClient');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  //Init Dynamo DB and add to dataSources Object
+  dataSources: () => {
+    return {
+      dynamo: dynamo.init()
+    };
+  },
+  // Auth type stuff goes here
   context: ({ req }) => {
     // get the user token from the headers
     const token = req.headers.authorization || '';
-    //TODO: remove this
+    //TODO: remove this, finish auth
     log.info(token);
     return {};
   },
   formatResponse: response => {
+    console.log('test?');
     log.info(response);
     return response;
   }
 });
 
-// In the most basic sense, the ApolloServer can be started
-// by passing type definitions (typeDefs) and the resolvers
-// responsible for fetching the data for those types.
 module.exports = server;

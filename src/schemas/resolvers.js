@@ -1,16 +1,12 @@
-const users = [
-  {
-    email: 'hpotter@gmail.com',
-    password: 'nimbus2000'
-  },
-  {
-    email: 'malfoy@aol.com',
-    password: 'Slytherin4eva'
-  }
-];
+const dynamo = require('../modules/dynamoDBClient');
 
 module.exports = {
   Query: {
-    users: () => users
+    getUser: email => dataSources.dynamo.getUser(email)
+  },
+  Mutation: {
+    signup: user => {
+      dataSources.dynamo.putUser(user.email);
+    }
   }
 };
