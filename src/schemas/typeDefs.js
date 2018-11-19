@@ -10,6 +10,10 @@ module.exports = gql`
     email: String
     password: String
   }
+  type SignupResponse {
+    email: String
+    token: String
+  }
 
   type Query {
     getUser(email: String!): User
@@ -17,6 +21,6 @@ module.exports = gql`
   }
 
   type Mutation {
-    signup(user: UserInput!): User
+    signup(user: UserInput!): SignupResponse
   }
 `;

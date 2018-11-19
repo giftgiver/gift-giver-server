@@ -43,8 +43,8 @@ const putUser = async ({ email, password }) => {
     }
   };
   try {
-    const putUserResponse = await documentClient.put(params).promise();
-    return putUserResponse;
+    const putUserPromise = await documentClient.put(params).promise();
+    return {};
   } catch (error) {
     throw new Error();
   }

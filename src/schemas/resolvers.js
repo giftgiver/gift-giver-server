@@ -1,4 +1,5 @@
 const dynamo = require('../modules/dynamoDBClient');
+const FAKE_TOKEN = 'FAKE_TOKEN';
 
 const resolvers = {
   Query: {
@@ -11,11 +12,15 @@ const resolvers = {
   },
   Mutation: {
     signup: async (_, { user }, context) => {
-      const putUserResponse = await dynamo.putUser({
-        email: user.email,
-        password: user.password
-      });
-      return putUserResponse;
+      try {
+        await dynamo.putUser({
+          email: user.email,
+          password: user.password
+        });
+        return { email: user.email, token: FAKE_TOKEN };
+      } catch (error) {
+        throw new Error(error);
+      }
     }
   }
 };
