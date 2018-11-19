@@ -3,9 +3,9 @@ const log = require('../log');
 const userTable = {
   TableName: 'Users',
   KeySchema: [
-    { AttributeName: 'id', KeyType: 'HASH' } //Partition key
+    { AttributeName: 'email', KeyType: 'HASH' } //Partition key
   ],
-  AttributeDefinitions: [{ AttributeName: 'id', AttributeType: 'S' }],
+  AttributeDefinitions: [{ AttributeName: 'email', AttributeType: 'S' }],
   ProvisionedThroughput: {
     ReadCapacityUnits: 5,
     WriteCapacityUnits: 5
@@ -13,14 +13,19 @@ const userTable = {
 };
 
 let dynamo;
+let documentClient;
 
-const initDynamoDb = async () => {
-  const AWS = require('aws-sdk');
-  AWS.config.update({
-    region: 'us-east-1',
-    endpoint: 'http://localhost:8000'
-  });
-  dynamo = await new AWS.DynamoDB();
+const init = async () => {
+  if (!dynamo) {
+    const AWS = require('aws-sdk');
+    AWS.config.update({
+      region: 'us-east-1',
+      endpoint: 'http://localhost:8000'
+    });
+
+    dynamo = await new AWS.DynamoDB();
+    documentClient = await new AWS.DynamoDB.DocumentClient();
+  }
 };
 
 const createUsersTable = async () => {
@@ -28,45 +33,35 @@ const createUsersTable = async () => {
   return dynamo.createTable(userTable).promise();
 };
 
-const putUser = async (email, hashedPassword) => {
+const putUser = async ({ email, password }) => {
   log.info('Put User');
   const params = {
+    TableName: 'Users',
     Item: {
-      email: {
-        S: `${email}`
-      },
-      password: {
-        S: `${hashedPassword}`
-      }
-    },
-    ReturnConsumedCapacity: 'TOTAL',
-    TableName: 'User'
+      email: email,
+      password: password
+    }
   };
+
   try {
-    const dynamoResponse = await dynamo.putItem(params);
-    return dynamoResponse;
+    const putUser = await documentClient.put(params).promise();
+    return putUser;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-const getUser = async (email, hashedPassword) => {
+const getUser = async ({ email }) => {
   log.info('Get User');
   const params = {
-    Item: {
-      email: {
-        S: `${email}`
-      },
-      password: {
-        S: `${hashedPassword}`
-      }
-    },
-    ReturnConsumedCapacity: 'TOTAL',
-    TableName: 'User'
+    TableName: 'Users',
+    Key: {
+      email: email
+    }
   };
   try {
-    const dynamoResponse = await dynamo.getItem(params);
-    return dynamoResponse;
+    const getUser = await documentClient.get(params).promise();
+    return getUser;
   } catch (error) {
     throw new Error(error);
   }
@@ -75,16 +70,23 @@ const getUser = async (email, hashedPassword) => {
 const deleteTables = async () => {
   log.info('Deleting Tables');
   const tableDeletePromises = [];
-  const tables = await dynamo.listTables.promise();
+  const tables = await dynamo.listTables({}).promise();
 
-  tables.data.TableNames.map(table =>
-    tableDeletePromises.push(dynamo.deleteTable({ TableName: `${table}` }))
+  //Create an array of table delete promises
+  tables.TableNames.map(table =>
+    tableDeletePromises.push(
+      dynamo.deleteTable({ TableName: `${table}` }).promise()
+    )
   );
-  log.info(tableDeletePromises);
+
+  const deleteTableResults = await Promise.all(tableDeletePromises);
+  return deleteTableResults;
 };
 
 module.exports = {
-  createUserTable,
+  init,
+  createUsersTable,
+  deleteTables,
   putUser,
   getUser
 };

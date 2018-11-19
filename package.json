@@ -27,6 +27,7 @@
   "homepage": "https://github.com/giftgiver/gift-giver-server#readme",
   "dependencies": {
     "apollo-server": "^2.2.2",
+    "aws-sdk": "^2.358.0",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3",
     "lodash": "^4.17.11",

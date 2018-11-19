@@ -1,10 +1,10 @@
-import { mockServer } from 'graphql-tools';
-import schema from './mySchema.graphql';
+// const { mockServer } = require('graphql-tools');
+// const { schema } = require('./mySchema.graphql';
 
-const myMockServer = mockServer(schema);
-myMockServer.query(`{
-  allUsers: {
-    id
-    name
-  }
-}`);
+// const myMockServer = mockServer(schema);
+// myMockServer.query(`{
+//   allUsers: {
+//     id
+//     name
+//   }
+// }`);
