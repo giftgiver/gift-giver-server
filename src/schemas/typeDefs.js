@@ -13,9 +13,10 @@ module.exports = gql`
 
   type Query {
     getUser(email: String!): User
+    getUsers: [User]
   }
 
   type Mutation {
-    signup(user: UserInput): User
+    signup(user: UserInput!): User
   }
 `;

@@ -42,12 +42,11 @@ const putUser = async ({ email, password }) => {
       password: password
     }
   };
-
   try {
-    const putUser = await documentClient.put(params).promise();
-    return putUser;
+    const putUserResponse = await documentClient.put(params).promise();
+    return putUserResponse;
   } catch (error) {
-    throw new Error(error);
+    throw new Error();
   }
 };
 
@@ -67,6 +66,24 @@ const getUser = async ({ email }) => {
   }
 };
 
+const getUsers = async () => {
+  log.info('Get Users');
+  const params = {
+    TableName: 'Users'
+  };
+
+  try {
+    const users = await documentClient.query(params).promise();
+    return users;
+  } catch (error) {
+    //Todo: look at this pattern this feel wrong...
+    throw new Error(error);
+  }
+};
+
+/**
+ * CAREFUL!!For testing
+ */
 const deleteTables = async () => {
   log.info('Deleting Tables');
   const tableDeletePromises = [];
@@ -88,5 +105,6 @@ module.exports = {
   createUsersTable,
   deleteTables,
   putUser,
-  getUser
+  getUser,
+  getUsers
 };

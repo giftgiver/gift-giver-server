@@ -4,11 +4,11 @@ services:
     image: amazon/dynamodb-local
     ports:
       - '8000:8000'
-  application:
-    depends_on:
-      - dynamoDb
-    build:
-      context: .
-      dockerfile: ./docker/application/Dockerfile
-    ports:
-      - '1337:1337'
+  # application:
+  #   depends_on:
+  #     - dynamoDb
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/application/Dockerfile
+  #   ports:
+  #     - '1337:1337'

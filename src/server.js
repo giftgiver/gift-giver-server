@@ -5,25 +5,26 @@ const dynamo = require('./modules/dynamoDBClient');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 
+dynamo.init();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  //Init Dynamo DB and add to dataSources Object
-  dataSources: () => {
-    return {
-      dynamo: dynamo.init()
-    };
-  },
   // Auth type stuff goes here
-  context: ({ req }) => {
-    // get the user token from the headers
-    const token = req.headers.authorization || '';
-    //TODO: remove this, finish auth
-    log.info(token);
-    return {};
+  context: async ({ req }) => {
+    log.info('Context Function');
+    //auth stuff happens here
+    // if (!req || !req.headers) {
+    //   return;
+    // }
+    // const token = req.headers.authorization || '';
+    // const checkToken = await userController.findOrCreateUser(token);
+    // if (!checkToken.hasOwnProperty('authorized')) {
+    //   return { user: checkToken, authorized: true };
+    // }
+    // return checkToken;
   },
   formatResponse: response => {
-    console.log('test?');
     log.info(response);
     return response;
   }

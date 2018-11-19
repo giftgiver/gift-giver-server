@@ -1,12 +1,23 @@
 const dynamo = require('../modules/dynamoDBClient');
 
-module.exports = {
+const resolvers = {
   Query: {
-    getUser: email => dataSources.dynamo.getUser(email)
+    getUser: (_, { email }, context) => {
+      dynamo.getUser(email);
+    },
+    getUsers: (_, {}, context) => {
+      dynamo.getUsers();
+    }
   },
   Mutation: {
-    signup: user => {
-      dataSources.dynamo.putUser(user.email);
+    signup: async (_, { user }, context) => {
+      const putUserResponse = await dynamo.putUser({
+        email: user.email,
+        password: user.password
+      });
+      return putUserResponse;
     }
   }
 };
+
+module.exports = resolvers;
