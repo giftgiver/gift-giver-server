@@ -7,6 +7,8 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     console.log('Context Function');
+    const token = req.headers.authorization;
+    console.log(token);
     //auth stuff happens here
     // if (!req || !req.headers) {
     //   return;

@@ -6,10 +6,11 @@ const testUser = {
   TableName: 'Users',
   Item: {
     id: '*',
-    email: 'mychaelrw@gmail.com.com',
+    email: 'mychaelrw@gmail.com',
     firstName: 'Mychael',
     lastName: 'Walton',
-    phoneNumber: '9711111111'
+    phoneNumber: '9711111111',
+    passwordHash: '$2b$10$e3Sh9xxAw4ocqkJZN1uX4uQh5ViZ35VbEKYvjx1naPdAAz7SA4.8a'
   }
 };
 

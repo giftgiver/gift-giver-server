@@ -1,15 +1,24 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
 
-// TODO: also: aaa-auth module? push this solution first for demos
+const privateKey = fs.readFileSync(
+  path.resolve(__dirname, '../../../keys/gift-giver-server.private')
+);
+const publicKey = fs.readFileSync(
+  path.resolve(__dirname, '../../../keys/gift-giver-server.pub')
+);
 
 // TODO: Get this to work.
-// const JWT_SECRET = config.get('jwtSecret');
 
-const JWT_SECRET = 'shhhhhhhhhhh';
-
-const getSignedJwt = id => {
-  const token = jwt.sign({ id: id }, JWT_SECRET);
+const getSignedJwt = email => {
+  const token = jwt.sign({ email: email }, privateKey, { algorithm: 'RS256' });
   return token;
 };
 
-module.exports = { getSignedJwt };
+const verifyJwt = jwt => {
+  const decodedJwt = jwt.verify(jwt, publicKey);
+  return decodedJwt;
+};
+
+module.exports = { getSignedJwt, verifyJwt };

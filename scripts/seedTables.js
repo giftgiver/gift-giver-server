@@ -3,9 +3,9 @@ const dynamo = require('../src/modules/dynamo/documentClient');
 const userTable = {
   TableName: 'Users',
   KeySchema: [
-    { AttributeName: 'id', KeyType: 'HASH' } //Partition key
+    { AttributeName: 'email', KeyType: 'HASH' } //Partition key
   ],
-  AttributeDefinitions: [{ AttributeName: 'id', AttributeType: 'S' }],
+  AttributeDefinitions: [{ AttributeName: 'email', AttributeType: 'S' }],
   ProvisionedThroughput: {
     ReadCapacityUnits: 5,
     WriteCapacityUnits: 5

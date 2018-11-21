@@ -1,10 +1,10 @@
 const dynmo = require('../documentClient');
 
-const getUser = async ({ id }) => {
+const getUser = async ({ email }) => {
   const params = {
     TableName: 'Users',
     Key: {
-      id: id
+      email: email
     }
   };
   try {

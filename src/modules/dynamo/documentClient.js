@@ -18,16 +18,22 @@ const setupAWS = async () => {
       region: REGION,
       // TODO: fix config
       endpoint: 'http://localhost:8000'
-      // endpoint: config.get('localDynamoEndpoint')
     });
-    dynamo = await new AWS.DynamoDB();
-    documentClient = await new AWS.DynamoDB.DocumentClient();
+
+    try {
+      dynamo = await new AWS.DynamoDB();
+      documentClient = await new AWS.DynamoDB.DocumentClient();
+    } catch (error) {
+      log.error(error);
+      throw new Error(error);
+    }
   } else {
     // AWS.config.update({
     //   region: REGION
     // });
     // dynamo = await new AWS.DynamoDB();
     // documentClient = await new AWS.DynamoDB.DocumentClient();
+    log.error(error);
     throw new Error('NODE_ENV=localhost not set');
   }
 };
