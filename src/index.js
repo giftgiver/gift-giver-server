@@ -1,19 +1,13 @@
 const { ApolloServer, gql } = require('apollo-server');
 const uuidv4 = require('uuid/v4');
-const path = require('path');
 
 const dynamo = require('./modules/dynamo/documentClient');
 const read = require('./modules/dynamo/read/readService');
 const write = require('./modules/dynamo/write/writeService');
-const logger = require('./log');
 const auth = require('./modules/auth/auth');
 
 // TODO: find a graceful way to hook these into the service start (also I don think they are working now);
 dynamo.setupAWS();
-logger.init();
-config.init({
-  configDir: path.join(__dirname, 'conf')
-});
 
 // The GraphQL schema
 const typeDefs = gql`
