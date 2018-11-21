@@ -1,6 +1,4 @@
-// A map of functions which return data for the schema.
 const resolvers = {
-  // A map of functions which return data for the schema.
   Query: {
     healthcheck: () => 'success',
     getUser: async (parent, { id }, context, info) => {
@@ -16,11 +14,9 @@ const resolvers = {
   },
   Mutation: {
     async createUser(parent, { user }, context, info) {
-      // Generate UUID
       const id = uuidv4();
       user.id = id;
 
-      // Generate JWT token
       const jwt = auth.getSignedJwt(id);
 
       try {

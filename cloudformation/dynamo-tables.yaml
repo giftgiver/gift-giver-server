@@ -1,26 +1,22 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Creates the tables used for graphql-poc
+Description: Creates the tables used for gift-giver-server
 Parameters:
-  stackIdentifier:
-    Description: If provided, start with a "-". Should be blank for prod.
+  stack:
     Type: String
     Default: -int
   UsersTableReadCapacityUnits:
     Default: '5'
-    Description: Read Capacity Units for user table
     Type: Number
     MinValue: '1'
   UsersTableWriteCapacityUnits:
     Default: '5'
-    Description: Write Capacity Units for user table
     Type: Number
     MinValue: '1'
-
 Resources:
-  graphqlPocUserTable:
+  giftGiverUsersTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub users${stackIdentifier}
+      TableName: !Sub gift-giver-users${stack}
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S

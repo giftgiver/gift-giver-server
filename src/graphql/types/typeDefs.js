@@ -1,8 +1,11 @@
 // The GraphQL schema
+const { gql } = require('apollo-server');
+
 const typeDefs = gql`
   input UserInput {
     id: String
     email: String
+    password: String
     firstName: String
     lastName: String
     phoneNumber: String
@@ -15,7 +18,6 @@ const typeDefs = gql`
     phoneNumber: String
   }
   type CreateUserReponse {
-    email: String
     token: String
   }
   type Query {

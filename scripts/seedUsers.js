@@ -1,6 +1,7 @@
 const dynamo = require('../src/modules/dynamo/documentClient');
 
-//TODO: fix config, table/ test user info should not be hard coded
+//TODO: expand to multiple users
+
 const testUser = {
   TableName: 'Users',
   Item: {
@@ -19,7 +20,6 @@ const createAdminUser = async () => {
       .getDocClient()
       .put(testUser)
       .promise();
-    console.log(createUserResponse);
     console.log('Admin User Creation Successful!');
     return createUserResponse;
   } catch (error) {
