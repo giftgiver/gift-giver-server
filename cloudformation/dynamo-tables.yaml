@@ -20,16 +20,12 @@ Resources:
   graphqlPocUserTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub walton-graphql-users${stackIdentifier}
+      TableName: !Sub users${stackIdentifier}
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
-        - AttributeName: email
-          AttributeType: S
       KeySchema:
         - AttributeName: id
-          KeyType: HASH
-        - AttributeName: email
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'UsersTableReadCapacityUnits'

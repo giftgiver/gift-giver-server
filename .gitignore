@@ -16,3 +16,5 @@ src/conf/languages
 build/
 *.nkf
 .nyc_output
+mochawesome-report
+reports
