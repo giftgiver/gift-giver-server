@@ -1,0 +1,4 @@
+{
+  "localDynamoEndpoint": "http://localhost:8000",
+  "jwtSecret": "shhhhhhhh"
+}

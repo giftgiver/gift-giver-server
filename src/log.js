@@ -1,9 +1,18 @@
-const IS_LOCAL = process.env.NODE_ENV === 'localhost' ? true : false;
+const pino = require('pino');
 
-const log = require('pino')({
-  prettyPrint: {
-    levelFirst: IS_LOCAL
-  }
-});
+let logger;
 
-module.exports = log;
+const init = async () => {
+  logger = pino({
+    useLevelLabels: true
+  });
+};
+
+const getLogger = () => {
+  return logger;
+};
+
+module.exports = {
+  init,
+  getLogger
+};

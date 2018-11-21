@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates the tables used for graphql-poc
+Parameters:
+  stackIdentifier:
+    Description: If provided, start with a "-". Should be blank for prod.
+    Type: String
+    Default: -int
+  UsersTableReadCapacityUnits:
+    Default: '5'
+    Description: Read Capacity Units for user table
+    Type: Number
+    MinValue: '1'
+  UsersTableWriteCapacityUnits:
+    Default: '5'
+    Description: Write Capacity Units for user table
+    Type: Number
+    MinValue: '1'
+
+Resources:
+  graphqlPocUserTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub walton-graphql-users${stackIdentifier}
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: email
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref 'UsersTableReadCapacityUnits'
+        WriteCapacityUnits: !Ref 'UsersTableWriteCapacityUnits'

@@ -1,2 +1,0 @@
-serverPort: 1337
-dynamoDBHost: 'http://localhost:8000'

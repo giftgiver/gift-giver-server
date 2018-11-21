@@ -1,76 +1,62 @@
 {
-  "name": "gift-giver-server",
+  "name": "graphql-dynamo-poc",
   "version": "1.0.0",
-  "description": "Gift-Giver GraphQL",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "compose-up": "docker-compose up --build",
-    "compose-down": "docker-compose down",
-    "start": "node ./start.js",
-    "test": "NODE_ENV=localhost gulp test",
-    "test-coverage": "NODE_ENV=localhost nyc gulp test",
-    "dev": "NODE_ENV=localhost gulp dev",
-    "format": "gulp format",
-    "pack": "gulp pack",
     "lint": "gulp lint",
-    "clean": "gulp clean"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/giftgiver/gift-giver-server.git"
+    "lint-fix": "gulp lint-fix",
+    "test": "NODE_ENV=localhost nyc gulp test",
+    "dev": "NODE_ENV=localhost gulp dev",
+    "start": "NODE_ENV=localhost node ./start.js",
+    "generate-test-table": "node ./scripts/createUsersTable.js",
+    "generate-admin-user": "node ./scripts/createAdminUser.js",
+    "tar": "gulp pack",
+    "clean": "gulp clean",
+    "dynamo-up": "docker-compose up",
+    "dynamo-down": "docker-compose down"
   },
   "author": "Mychael Walton",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/giftgiver/gift-giver-server/issues"
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "eslint": "^5.9.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-exit": "0.0.2",
+    "gulp-gzip": "^1.4.2",
+    "gulp-if": "^2.0.2",
+    "gulp-istanbul": "^1.1.3",
+    "gulp-mocha": "^6.0.0",
+    "gulp-nodemon": "^2.4.1",
+    "gulp-prettier": "^2.0.0",
+    "gulp-run": "^1.7.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-tar": "^2.1.0",
+    "gulp-wait": "0.0.2",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "nyc": "^13.1.0"
   },
-  "homepage": "https://github.com/giftgiver/gift-giver-server#readme",
   "dependencies": {
     "apollo-server": "^2.2.2",
     "aws-sdk": "^2.358.0",
     "graphql": "^14.0.2",
-    "graphql-tools": "^4.0.3",
     "jsonwebtoken": "^8.4.0",
-    "lodash": "^4.17.11",
-    "meow": "^5.0.0",
-    "nconf": "^0.10.0",
-    "nconf-yaml": "^1.0.2",
-    "pino": "^5.8.1"
-  },
-  "devDependencies": {
-    "apollo-server-testing": "^2.2.2",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "eslint": "^5.9.0",
-    "eslint-config-prettier": "^3.3.0",
-    "gulp": "^3.0.0",
-    "gulp-eslint": "^5.0.0",
-    "gulp-gzip": "^1.4.2",
-    "gulp-mocha": "^6.0.0",
-    "gulp-nodemon": "^2.4.1",
-    "gulp-prettier": "^2.0.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-spawn-mocha-nyc": "^1.0.0",
-    "gulp-tar": "^2.1.0",
-    "istanbul": "1.1.0-alpha.1",
-    "mocha": "^5.2.0",
-    "pino-pretty": "^2.2.3",
-    "prettier": "^1.15.2",
-    "sinon": "^7.1.1"
+    "pino": "^5.8.1",
+    "uuid": "^3.3.2"
   },
   "nyc": {
     "check-coverage": true,
     "lines": 90,
     "statements": 90,
-    "functions": 90,
-    "branches": 90,
+    "functions": 89,
+    "branches": 89,
     "include": [
       "src/"
     ],
-    "exlude": [
-      "./src/server.js",
-      "./start.js"
-    ],
+    "exclude": [],
     "reporter": [
       "lcov",
       "text",
