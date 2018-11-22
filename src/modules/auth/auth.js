@@ -64,7 +64,7 @@ const isAuthed = req => {
 };
 
 const getSignedJwt = async email => {
-  const token = await jwt.sign({ email: email }, privateKey, {
+  const token = await jwt.sign({ email }, privateKey, {
     algorithm: 'RS256'
   });
   return token;

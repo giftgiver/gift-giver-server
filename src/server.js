@@ -14,10 +14,14 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   formatError: error => {
-    log.error(error);
+    // log.error(error);
     return error;
   },
-  context: ({ req }) => auth.context({ req })
+  context: ({ req }) => auth.context({ req }),
+  formatResponse: response => {
+    // log.info(response);
+    return response;
+  }
 });
 
 module.exports = server;

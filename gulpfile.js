@@ -101,7 +101,7 @@ gulp.task('dev', done => {
   const stream = nodemon({
     script: `./start`,
     ext: 'js',
-    env: { NODE_ENV: 'localhost' },
+    env: { NODE_ENV: 'development' },
     tasks: ['format', 'lint'],
     done: done
   });
@@ -115,5 +115,3 @@ gulp.task('dev', done => {
       stream.emit('restart', 10); // restart the server in 10 seconds
     });
 });
-
-gulp.task('default', ['test']);

@@ -7,31 +7,29 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Mocha Tests",
       "env": {
         "NODE_ENV": "localhost"
       },
-      "program": "${workspaceFolder}/start.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Mocha Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",
         "tdd",
         "--timeout",
         "999999",
-        "--reporter",
-        "mochawesome",
         "--colors",
-        "${workspaceFolder}/test"
+        "${workspaceFolder}/test/**/*Spec.js"
       ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
       "env": {
         "NODE_ENV": "localhost"
       },
-      "internalConsoleOptions": "openOnSessionStart"
+      "program": "${workspaceFolder}/start.js"
     }
   ]
 }

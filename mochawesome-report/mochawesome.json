@@ -1,0 +1,166 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2018-11-22T20:27:05.113Z",
+    "end": "2018-11-22T20:27:05.225Z",
+    "duration": 112,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "danger",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "9b5f9ef4-93b9-4f0d-b108-3c6180c360c4",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "12483c08-4a88-482b-9303-2fb1624e256d",
+        "title": "index",
+        "fullFile": "/Users/mychaelwalton/dev/gift-giver/gift-giver-server/test/indexSpec.js",
+        "file": "/test/indexSpec.js",
+        "beforeHooks": [
+          {
+            "title": "\"before all\" hook",
+            "fullTitle": "index \"before all\" hook",
+            "timedOut": false,
+            "duration": 0,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "sandbox = sinon.sandbox.create();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "b544f48f-08aa-4423-ba20-e9e7963d1543",
+            "isHook": true,
+            "skipped": false
+          },
+          {
+            "title": "\"before each\" hook",
+            "fullTitle": "index \"before each\" hook",
+            "timedOut": false,
+            "duration": 19,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "listenStub = proxyquire('apollo-server', { listen: sandbox.stub() });\nsetupAWSStub = sandbox.stub(docClient, 'setupAWS');",
+            "err": {},
+            "isRoot": false,
+            "uuid": "20ffe666-49b9-4122-90a5-266df4e33c1d",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "afterHooks": [
+          {
+            "title": "\"after each\" hook",
+            "fullTitle": "index \"after each\" hook",
+            "timedOut": false,
+            "duration": 0,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "sandbox.restore();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "dd6431b4-c3aa-418b-9a37-d595bd83b0ac",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "c5426473-a3e7-4704-ad39-27043f5b2702",
+            "title": "start",
+            "fullFile": "/Users/mychaelwalton/dev/gift-giver/gift-giver-server/test/indexSpec.js",
+            "file": "/test/indexSpec.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should be a function",
+                "fullTitle": "index start should be a function",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(index.start).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "71d67333-ff73-4bbc-a3c7-f16e788e4d8b",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "should call dynamo init and server.listen with port provided",
+                "fullTitle": "index start should call dynamo init and server.listen with port provided",
+                "timedOut": false,
+                "duration": 23,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
+                "pending": false,
+                "code": "await index.start(TEST_PORT);\nexpect(setupAWSStub.callCount, 'setupAWS is called once').to.equal(1);\nexpect(listenStub.callCount, 'listen is called once').to.equal(1);\nexpect(\n  listenStub.getCall(0).args[0],\n  'listen is called with provided port'\n).to.equal(TEST_PORT);",
+                "err": {
+                  "message": "AssertionError: listen is called once: expected undefined to equal 1",
+                  "estack": "AssertionError: listen is called once: expected undefined to equal 1\n    at Context.it (test/indexSpec.js:31:64)\n    at <anonymous>\n    at process._tickDomainCallback (internal/process/next_tick.js:228:7)"
+                },
+                "isRoot": false,
+                "uuid": "4fe00d10-cc5c-4069-b88d-6a4438afe244",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "71d67333-ff73-4bbc-a3c7-f16e788e4d8b"
+            ],
+            "failures": [
+              "4fe00d10-cc5c-4069-b88d-6a4438afe244"
+            ],
+            "pending": [],
+            "skipped": [],
+            "duration": 24,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2018
+}

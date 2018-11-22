@@ -46,7 +46,7 @@ Local development utilizes a docker image of local-dynamo. After bringing up the
 
 ## VSCode
 
-I have included my vscode debug config in source control so that use of the node/debugger breakpoints are supported out of the box. Code users will see two debug configurations for attching to the docker container and one for running mocha tests.
+I have included my vscode debug config in source control so that use of the node/debugger breakpoints are supported out of the box. Code users will see two debug configurations for attching to the docker container and one for running jest tests.
 
 ## TODO:
 
