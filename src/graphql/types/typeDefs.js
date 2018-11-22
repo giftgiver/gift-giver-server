@@ -1,3 +1,4 @@
+const { gql } = require('apollo-server');
 // The GraphQL schema
 const { gql } = require('apollo-server');
 
