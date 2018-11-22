@@ -101,7 +101,7 @@ gulp.task('dev', done => {
   const stream = nodemon({
     script: `./start`,
     ext: 'js',
-    env: { NODE_ENV: 'development' },
+    env: { NODE_ENV: 'localhost' },
     tasks: ['format', 'lint'],
     done: done
   });

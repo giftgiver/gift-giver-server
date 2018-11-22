@@ -1,9 +1,10 @@
-const { gql } = require('apollo-server');
 // The GraphQL schema
+const { gql } = require('apollo-server');
+
 const typeDefs = gql`
   input UserInput {
-    id: String
     email: String
+    password: String
     firstName: String
     lastName: String
     phoneNumber: String
@@ -15,12 +16,16 @@ const typeDefs = gql`
     lastName: String
     phoneNumber: String
   }
-  type CreateUserReponse {
+  input Login {
     email: String
+    password: String
+  }
+  type CreateUserReponse {
     token: String
   }
   type Query {
-    getUser(id: String!): User
+    getUser(email: String!): User
+    login(login: Login!): User
     healthcheck: String
 
     # getUsers: [User]

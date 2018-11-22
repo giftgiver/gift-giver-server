@@ -8,7 +8,8 @@ const createUser = async ({ user }) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
+      passwordHash: user.passwordHash
     }
   };
 

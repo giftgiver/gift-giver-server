@@ -1,15 +1,84 @@
+const {
+  ForbiddenError,
+  UserInputError,
+  AuthenticationError
+} = require('apollo-server');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
+const log = require('pino')();
+const _ = require('lodash');
+const AUTHED_OPERATION = ['getUser'];
 
-// TODO: also: aaa-auth module? push this solution first for demos
+let privateKey;
+let publicKey;
 
-// TODO: Get this to work.
-// const JWT_SECRET = config.get('jwtSecret');
+const JWT_VERIFY_ERROR = 'JWT Authentication Failed';
 
-const JWT_SECRET = 'shhhhhhhhhhh';
+const loadkeys = () => {
+  try {
+    // PRIVATE KEYS TODO: migrate this to like kms? key rotates are neat
+    privateKey = fs.readFileSync(
+      path.resolve(__dirname, '../../../keys/private.pem')
+    );
+    publicKey = fs.readFileSync(
+      path.resolve(__dirname, '../../../keys/public.pem')
+    );
+  } catch (error) {
+    log.error(error);
+    throw new Error(error);
+  }
+};
 
-const getSignedJwt = id => {
-  const token = jwt.sign({ id: id }, JWT_SECRET);
+// Auth middleware, checks each for auth before performing query.
+const context = async ({ req }) => {
+  const token = req.headers.authorization || '';
+  const authed = isAuthed(req);
+
+  // Let Non-Authed endpoints through
+  if (!authed) {
+    return req;
+  }
+  // Return Auth error for authed missing tokens on authed queries
+  if (authed && !token) {
+    throw new AuthenticationError(JWT_VERIFY_ERROR);
+  }
+
+  if (authed && !verifyJwt(token)) {
+    throw new AuthenticationError();
+  }
+  return req;
+};
+
+const isAuthed = req => {
+  const body = req.body || '';
+  const operationName = body.operationName || '';
+
+  if (operationName) {
+    return _.includes(AUTHED_OPERATION, operationName);
+  } else {
+    throw new UserInputError(
+      'Missing Operation Name, shorthand queries not supported.'
+    );
+  }
+};
+
+const getSignedJwt = async email => {
+  const token = await jwt.sign({ email: email }, privateKey, {
+    algorithm: 'RS256'
+  });
   return token;
 };
 
-module.exports = { getSignedJwt };
+const verifyJwt = async token => {
+  const decodedJwt = await jwt.verify(token, publicKey);
+
+  if (!decodedJwt) {
+    throw new AuthenticationError(JWT_VERIFY_ERROR);
+  } else {
+    return decodedJwt;
+  }
+};
+
+loadkeys();
+module.exports = { context, getSignedJwt, verifyJwt };
