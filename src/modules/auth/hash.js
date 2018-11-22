@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
-const log = require('../../log');
-
+const log = require('pino')();
 const SALT_ROUNDS = 10;
 
 const hashPassword = async ({ password }) => {
@@ -8,7 +7,7 @@ const hashPassword = async ({ password }) => {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     return hashedPassword;
   } catch (error) {
-    log.getLogger().error(error);
+    log.error(error);
     throw new Error(error);
   }
 };
@@ -18,7 +17,7 @@ const compareHash = async ({ password, hash }) => {
     const match = await bcrypt.compare(password, hash);
     return match;
   } catch (error) {
-    log.getLogger().error(error);
+    log.error(error);
     throw new Error(error);
   }
 };

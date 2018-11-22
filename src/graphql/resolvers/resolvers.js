@@ -19,7 +19,6 @@ const resolvers = {
           phoneNumber: user.phoneNumber
         };
       } else {
-        // Technical Debt: ?throw error?
         return {};
       }
     },
@@ -52,7 +51,8 @@ const resolvers = {
 
       const passwordHash = await hash.hashPassword({ password: user.password });
 
-      user = { ...user, passwordHash, id };
+      user.id = id;
+      user.passwordHash = passwordHash;
 
       try {
         await write.createUser({ user });
