@@ -9,8 +9,6 @@ const publicKey = fs.readFileSync(
   path.resolve(__dirname, '../../../keys/gift-giver-server.pub')
 );
 
-// TODO: Get this to work.
-
 const getSignedJwt = email => {
   const token = jwt.sign({ email: email }, privateKey, { algorithm: 'RS256' });
   return token;

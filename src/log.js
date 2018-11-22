@@ -13,6 +13,6 @@ const getLogger = () => {
 };
 
 module.exports = {
-  init,
-  getLogger
+  getLogger,
+  init
 };

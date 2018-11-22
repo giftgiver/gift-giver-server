@@ -5,6 +5,14 @@ const resolvers = require('./graphql/resolvers/resolvers');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  subscriptions: {
+    onConnect: async (connectionParams, webSocket, context) => {
+      console.log('on connect?');
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log('on disconnect?');
+    }
+  },
   context: async ({ req }) => {
     console.log('Context Function');
     const token = req.headers.authorization;

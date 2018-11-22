@@ -52,8 +52,7 @@ const resolvers = {
 
       const passwordHash = await hash.hashPassword({ password: user.password });
 
-      user.id = id;
-      user.passwordHash = passwordHash;
+      user = { ...user, passwordHash, id };
 
       try {
         await write.createUser({ user });
