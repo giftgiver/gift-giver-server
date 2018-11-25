@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
-const log = require('pino')();
+const log = require('pino').logger;
 const SALT_ROUNDS = 10;
 
 const hashPassword = async ({ password }) => {
   try {
     return bcrypt.hash(password, SALT_ROUNDS);
   } catch (error) {
-    log.error(error);
+    log.error(`bcrypt error: ${error.message}`);
     throw new Error(error);
   }
 };

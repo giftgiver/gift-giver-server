@@ -1,8 +1,7 @@
 const { gql } = require('apollo-server');
-const log = require('pino')(); //I feel like doing this in every file is dumb, but it's not working otherwise, TODO
 const server = require('./server');
 const docClient = require('./modules/dynamo/documentClient');
-
+const log = require('./log').logger;
 // TODO: find a graceful way to hook these into the service start (also I don think they are working now);
 
 const start = async port => {

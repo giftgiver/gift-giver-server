@@ -38,7 +38,6 @@
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
     "nyc": "^13.1.0",
-    "proxyquire": "^2.1.0",
     "sinon": "^7.1.1"
   },
   "dependencies": {
@@ -60,7 +59,9 @@
     "include": [
       "src/"
     ],
-    "exclude": [],
+    "exclude": [
+      "**/*server.js"
+    ],
     "reporter": [
       "lcov",
       "text",
